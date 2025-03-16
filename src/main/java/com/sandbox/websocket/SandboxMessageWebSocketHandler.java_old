@@ -1,0 +1,17 @@
+package com.sandbox.websocket;
+
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+public class SandboxMessageWebSocketHandler extends TextWebSocketHandler {
+    @Override
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        String receivedMessage = message.getPayload();
+        System.out.println("Received: " + receivedMessage);
+
+        // Echo message back
+        session.sendMessage(new TextMessage("Server received: " + receivedMessage));
+    }
+}
+
